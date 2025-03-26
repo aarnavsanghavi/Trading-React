@@ -9,20 +9,28 @@ import {
     TableRow,
   } from "@/components/ui/table";
   import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar"; 
-const Portfolio = () => {
+  import { Button } from "@/components/ui/button";
+import { BookmarkFilledIcon } from '@radix-ui/react-icons';
+
+const WatchList = () => {
+
+  const handleRemoveToWatchList=(value) =>{
+    console.log(value)
+  }
   return (
     <div className="p-5 lg:p-20">
-      <h1 className="font-bold text-3xl pb-5">Portfolio</h1>
-             <Table>
+      <h1 className="font-bold text-3xl pb-5">WatchList</h1>
+             <Table className="border">
   <TableCaption>.</TableCaption>
   <TableHeader>
     <TableRow>
-      <TableHead className="">Asset</TableHead>
-      <TableHead>Price</TableHead>
-      <TableHead>Unit</TableHead>
-      <TableHead>Change</TableHead>
-      <TableHead className="text-right">Change%</TableHead>
-      <TableHead className="text-right">Volume</TableHead>
+      <TableHead className="py-5">Coin</TableHead>
+      <TableHead>Symbol</TableHead>
+      <TableHead>Volume</TableHead>
+      <TableHead>Market Cap</TableHead>
+      <TableHead>24h</TableHead>
+      <TableHead className="">Price</TableHead>
+      <TableHead className="text-right text-red-600">Remove</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
@@ -33,10 +41,15 @@ const Portfolio = () => {
             </AvatarImage></Avatar>
             <span>Bitcoin</span></TableCell>
       <TableCell>BTC</TableCell>
-      <TableCell>Total Price</TableCell>
-      <TableCell>Market Cap Value</TableCell>
-      <TableCell className="text-right">24H Value</TableCell>
-      <TableCell className="text-right">Current Price</TableCell>
+      <TableCell>9122354665</TableCell>
+      <TableCell>1364758938795</TableCell>
+      <TableCell>-0.200009</TableCell>
+      <TableCell className="">$69249</TableCell>
+      <TableCell className="text-right">
+        <Button variant="ghost" onClick={() => handleRemoveToWatchList(item.id)} size="icon" className="h-10 w-10">
+          <BookmarkFilledIcon className= "w-6 h-6"/>
+        </Button>
+      </TableCell>
     </TableRow>)}
     <TableRow>
       <TableCell className="font-medium flex items-center gap-2">
@@ -56,4 +69,4 @@ const Portfolio = () => {
   )
 }
 
-export default Portfolio
+export default WatchList
