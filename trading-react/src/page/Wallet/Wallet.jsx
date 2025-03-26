@@ -1,10 +1,10 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { CopyIcon, UploadIcon, WalletIcon, IndianRupeeIcon, ShuffleIcon } from "lucide-react";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { ReloadIcon, UpdateIcon } from "@radix-ui/react-icons";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"; // Correct import
 import TopUpForm from "./TopUpForm";
 import WithdrawalForm from "./WithdrawalForm";
-import transferform from "./transferform";
+import Transferform from "./Transferform";
 
 export const Wallet = () => {
   return (
@@ -60,7 +60,7 @@ export const Wallet = () => {
                 <DialogTrigger>
                   <div className="h-24 w-24 hover:text-gray-400 cursor-pointer flex flex-col items-center justify-center rounded-md shadows-slate-800 shadow-md">
                     <UploadIcon />
-                    <span className="text-sm mt-2">Withdraw</span>
+                    <span className="text-sm mt-2">Withdrawal</span>
                   </div>
                 </DialogTrigger>
                 <DialogContent>
@@ -86,12 +86,18 @@ export const Wallet = () => {
                       Transfer to another wallet
                     </DialogTitle>
                   </DialogHeader>
-                  <transferform/>
+                  <Transferform/>
                 </DialogContent>
               </Dialog>
             </div>
           </CardContent>
         </Card>
+        <div className="py-5 pt-10">
+          <div className="flex gap-2 items-center pb-5">
+            <h1 className="text-2xl font semibold">History</h1>
+            <UpdateIcon className = "h-7 w-7 p-0 cursor-pointer hover:text-gray-400"/>
+          </div>
+        </div>
       </div>
     </div>
   );
