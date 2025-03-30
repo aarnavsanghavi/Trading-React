@@ -9,18 +9,26 @@ import {
   UserIcon,
   LogOutIcon,
   WalletIcon,
-} from "lucide-react"; // Import all icons from lucide-react
+  CreditCardIcon,
+  ArrowDownIcon,
+  ClockIcon,
+  CloudIcon,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+
 const menu = [
-  { name: "Home", path: "/", icon: <HomeIcon className="h-6 w-6" /> },
-  { name: "Portfolio", path: "/portfolio", icon: <LayersIcon className="h-6 w-6" /> },
-  { name: "Watchlist", path: "/watchlist", icon: <BookmarkIcon className="h-6 w-6" /> },
-  { name: "Activity", path: "/activity", icon: <ActivityIcon className="h-6 w-6" /> },
-  { name: "Profile", path: "/profile", icon: <UserIcon className="h-6 w-6" /> },
-  { name: "Wallet", path: "/wallet", icon: <WalletIcon className="h-6 w-6" /> },
-  { name: "Logout", path: "/logout", icon: <LogOutIcon className="h-6 w-6" /> },
+  { name: "Home", path: "/", icon: <HomeIcon className="h-5 w-5" /> },
+  { name: "Portfolio", path: "/portfolio", icon: <LayersIcon className="h-5 w-5" /> },
+  { name: "Watchlist", path: "/watchlist", icon: <BookmarkIcon className="h-5 w-5" /> },
+  { name: "Activity", path: "/activity", icon: <ActivityIcon className="h-5 w-5" /> },
+  { name: "Wallet", path: "/wallet", icon: <WalletIcon className="h-5 w-5" /> },
+  { name: "Payment Details", path: "/payment-details", icon: <CreditCardIcon className="h-5 w-5" /> },
+  { name: "Withdrawal", path: "/withdrawal", icon: <ArrowDownIcon className="h-5 w-5" /> },
+  { name: "Profile", path: "/profile", icon: <UserIcon className="h-5 w-5" /> },
+  { name: "Logout", path: "/logout", icon: <LogOutIcon className="h-5 w-5" /> },
 ];
+
 
 const Sidebar = () => {
   const navigate = useNavigate();

@@ -1,10 +1,11 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { CopyIcon, UploadIcon, WalletIcon, IndianRupeeIcon, ShuffleIcon } from "lucide-react";
 import { ReloadIcon, UpdateIcon } from "@radix-ui/react-icons";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"; // Correct import
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import TopUpForm from "./TopUpForm";
 import WithdrawalForm from "./WithdrawalForm";
 import Transferform from "./Transferform";
+import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 
 export const Wallet = () => {
   return (
@@ -32,10 +33,10 @@ export const Wallet = () => {
           </CardHeader>
           <CardContent>
             <div className="flex items-center">
-            <IndianRupeeIcon className="h-6 w-6" />
-                <span className="text-2xl font-semibold">
-                  20000
-                </span>
+              <IndianRupeeIcon className="h-6 w-6" />
+              <span className="text-2xl font-semibold">
+                20000
+              </span>
             </div>
 
             <div className="flex gap-7 mt-5">
@@ -95,12 +96,36 @@ export const Wallet = () => {
         <div className="py-5 pt-10">
           <div className="flex gap-2 items-center pb-5">
             <h1 className="text-2xl font semibold">History</h1>
-            <UpdateIcon className = "h-7 w-7 p-0 cursor-pointer hover:text-gray-400"/>
+            <UpdateIcon className="h-7 w-7 p-0 cursor-pointer hover:text-gray-400"/>
+          </div>
+
+          <div className="space-y-5">
+            {[1,1,1,1,1,1,1].map((item, i) => (
+              <div key={i}>
+                <Card className="lg:w-[50] px-5 flex justify-between items-center p-2">
+                  <div className="flex items-center gap-5">
+                    <Avatar>
+                      <AvatarFallback>
+                        <ShuffleIcon className=""/>
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <div className="space-y-1">
+                      <h1>Buy Asset</h1>
+                      <p className="text-sm text-gray-500">2024-06-02</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className={'text-green-500'}>9999 Inr</p>
+                  </div>
+                </Card>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Wallet;
