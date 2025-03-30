@@ -13,6 +13,7 @@ import WatchList from './page/Watchlist/WatchList';
 import Profile from './page/Profile/Profile';
 import SearchCoin from './page/Search/SearchCoin';
 import Notfound from './page/NotFound/Notfound';
+import Auth from './page/Auth/Auth';
 
 
 
@@ -20,7 +21,10 @@ function App() {
 
   return (
     <>
-        <Navbar />
+    <Auth/>
+
+    {false  && <div>
+    <Navbar />
         <Routes>
           <Route path = "/" element = {<Home/> }/>
           <Route path = "/portfolio" element = {<Portfolio/> }/>
@@ -34,6 +38,8 @@ function App() {
           <Route path = "/search" element = {<SearchCoin/> }/>
           <Route path = "*" element = {<Notfound/> }/>
         </Routes> 
+    </div>}
+        
         
     </>
   )
