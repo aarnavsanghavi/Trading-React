@@ -4,8 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from 'react-hook-form';
 import { DialogClose } from '@radix-ui/react-dialog';
+import { useDispatch } from 'react-redux';
+import { register } from '@/State/Auth/Action';
 
 const SignUp = () => {
+    const dispatch = useDispatch()
     const form = useForm({
         resolver: "",
         defaultValues:{
@@ -16,6 +19,7 @@ const SignUp = () => {
         }
     })
     const onSubmit=(data)=>{
+        dispatch(register(data))
         console.log(data)
     }
   return (
