@@ -15,6 +15,8 @@ import {
   CloudIcon,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from '@/State/Auth/Action';
 
 
 const menu = [
@@ -32,7 +34,10 @@ const menu = [
 
 const Sidebar = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const handleLogout = () =>{
+    dispatch(logout())
+  }
   return (
     <div className="h-full w-64 bg-gray-900 text-white p-5 space-y-4">
       {menu.map((item, index) => (
@@ -40,7 +45,12 @@ const Sidebar = () => {
           <Button
             variant="ghost"
             className="flex items-center gap-4 w-full text-white hover:bg-gray-700"
-            onClick={() => navigate(item.path)}
+            onClick={() => {
+              navigate(item.path)
+              if(item.name == "Logout"){
+                handleLogout()
+              }
+            }}
           >
             {item.icon}
             <span>{item.name}</span>

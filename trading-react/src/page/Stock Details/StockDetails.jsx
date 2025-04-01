@@ -14,8 +14,12 @@ import {
 } from "@/components/ui/dialog";
 import TradingForm from './TradingForm';
 import StockChart from "../Home/StockChart";
+import { useDispatch } from 'react-redux';
 
 const StockDetails = () => {
+  const dispatch = useDispatch()
+
+  
   return (
     <div className='p-5 mt-5 text-foreground bg-background'>
       <div className='flex justify-between items-center'>

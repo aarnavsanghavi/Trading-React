@@ -6,9 +6,11 @@ import { useForm } from 'react-hook-form';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { useDispatch } from 'react-redux';
 import { login } from '@/State/Auth/Action';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
     const dispatch=useDispatch()
+    const navigate = useNavigate()
     const form = useForm({
         resolver: "",
         defaultValues:{
@@ -18,7 +20,7 @@ const SignIn = () => {
         }
     })
     const onSubmit=(data)=>{
-        dispatch(login(data))
+        dispatch(login({data, navigate}))
         console.log(data)
     }
   return (

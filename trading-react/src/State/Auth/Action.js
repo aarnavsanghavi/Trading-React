@@ -8,7 +8,8 @@ import {
     REGISTER_SUCCESS,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
-    LOGIN_FAILURE
+    LOGIN_FAILURE,
+    LOGOUT
   } from "./ActionTypes";
 export const register = (userData) => async (dispatch) => {
     dispatch({ type: REGISTER_REQUEST });
@@ -33,11 +34,12 @@ export const login = (userData) => async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     const baseUrl = "http://localhost:5454";
     try {
-        const response = await axios.post(`${baseUrl}/auth/signin`, userData);
+        const response = await axios.post(`${baseUrl}/auth/signin`, userData.data);
         const user = response.data;
         console.log(user);
         dispatch({ type: LOGIN_SUCCESS, payload: user.jwt });
         localStorage.setItem("jwt",user.jwt)
+        userData.navigate("/")
     } catch (error) {
         dispatch({ type: LOGIN_FAILURE, payload: error.message });
         console.log(error);
@@ -63,3 +65,8 @@ export const getUser = (jwt) => async (dispatch) => {
         console.log(error);
     }
 };
+
+export const logout = () => (dispatch) => {
+    localStorage.clear();
+    dispatch({type: LOGOUT});
+}

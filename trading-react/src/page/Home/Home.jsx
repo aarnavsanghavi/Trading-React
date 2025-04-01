@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import AssetTable from "./AssetTable";
 import StockChart from "./StockChart";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { Dot, MessageCircle, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useDispatch, useSelector } from 'react-redux';
+import { getCoinList } from "@/State/Coin/Action";
 
 const Home = () => {
     const [category, setCategory] = React.useState("all");
     const [inputValue, setInputValue] = React.useState("");
     const [isBotRelease, setIsBotRelease] = React.useState(false)
-
+    const {coin} = useSelector(store=>store)
+    const dispatch = useDispatch()
     const handleBotRelease = () => setIsBotRelease(!isBotRelease);
 
     const handleCategory = (value) => {
@@ -27,6 +30,11 @@ const Home = () => {
         }
         setInputValue("")
     }
+    
+    useEffect(()=>{
+          dispatch(getCoinList(1))
+          console.log("Coin data:", coin)
+        }, [])
 
     return (
         <div className="relative min-h-screen">
@@ -63,7 +71,7 @@ const Home = () => {
                             Top Losers
                         </Button>
                     </div>
-                    <AssetTable />
+                    <AssetTable coin = {coin.coinList} category = {category}/>
                 </div>
 
                 {/* Right Side: StockChart and ETH Info */}

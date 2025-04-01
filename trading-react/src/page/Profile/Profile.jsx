@@ -15,7 +15,9 @@ import {
   DialogDescription,
 } from "/src/components/ui/dialog";
 import AccountVerificationForm from "./AccountVerificationForm"
+import { useSelector } from 'react-redux'
 const Profile = () => {
+  const {auth} = useSelector(store=>store);
   const handleEnableTwoStepVerification=()=>{
     console.log("two step verification")
   }
@@ -30,18 +32,8 @@ const Profile = () => {
           <CardContent>
             <div className='lg:flex gap-32'>
               <div className='space-y-7'>
-                <div className='flex'>
-                  <p className='w-[9rem]'>Email : </p>
-                  <p className='text-gray-500'>sanghavi.aarnav@gmail.com</p>
-                </div>
-                <div className='flex'>
-                  <p className='w-[9rem]'>Full Name : </p>
-                  <p className='text-gray-500'>Aarnav Sanghavi</p>
-                </div>
-                <div className='flex'>
-                  <p className='w-[9rem]'>Date of Birth : </p>
-                  <p className='text-gray-500'>28/01/2004</p>
-                </div>
+                
+
                 <div className='flex'>
                   <p className='w-[9rem]'>Nationality : </p>
                   <p className='text-gray-500'>Indian</p>
@@ -50,11 +42,11 @@ const Profile = () => {
               <div className='space-y-7'>
                 <div className='flex'>
                   <p className='w-[9rem]'>Email : </p>
-                  <p className='text-gray-500'>sanghavi.aarnav@gmail.com</p>
+                  <p className='text-gray-500'>{auth.user?.email}</p>
                 </div>
                 <div className='flex'>
                   <p className='w-[9rem]'>Full Name : </p>
-                  <p className='text-gray-500'>Aarnav Sanghavi</p>
+                  <p className='text-gray-500'>{auth.user?.fullName}</p>
                 </div>
                 <div className='flex'>
                   <p className='w-[9rem]'>Date of Birth : </p>

@@ -6,8 +6,10 @@ import logo from "@/assets/logo2.png";
 import Sidebar from "./Sidebar";
 import { Button } from "@/components/ui/button";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const {auth} = useSelector(store=>store)
   return (
     <div className="px-2 py-3 border-b z-50 bg-background bg-opacity-0 sticky top-0 left-0 right-0 flex justify-between items-center">
       {/* Left side: Menu button and logo */}
@@ -48,7 +50,9 @@ const Navbar = () => {
       {/* Right side: Avatar */}
       <div>
         <Avatar>
-          <AvatarFallback>Z</AvatarFallback>
+          <AvatarFallback>
+            {auth.user?.fullName[0].toUpperCase()}
+          </AvatarFallback>
         </Avatar>
       </div>
     </div>
