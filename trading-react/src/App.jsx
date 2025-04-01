@@ -14,11 +14,20 @@ import Profile from './page/Profile/Profile';
 import SearchCoin from './page/Search/SearchCoin';
 import Notfound from './page/NotFound/Notfound';
 import Auth from './page/Auth/Auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getUser } from './State/Auth/Action';
 
 
 
 function App() {
 
+  const {auth} = useSelector(store=>store)
+  const dispatch = useDispatch()
+  console.log("auth -----",auth)
+  useEffect(() => {
+    dispatch(getUser(localStorage.getItem("jwt")))
+  },[])
   return (
     <>
     <Auth/>

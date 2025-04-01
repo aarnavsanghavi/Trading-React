@@ -2,6 +2,7 @@ import axios from "axios";
 import {
     GET_USER_FAILURE,
     GET_USER_SUCCESS,
+    GET_USER_REQUEST,
     REGISTER_FAILURE,
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
@@ -49,9 +50,9 @@ export const getUser = (jwt) => async (dispatch) => {
     try {
         const response = await axios.get(`${baseUrl}/api/users/profile`,
         {
-            headers:{
-                Authorization:'Bearer ${jwt}'
-            }
+            headers: {
+                Authorization: `Bearer ${jwt}`
+              }
         }
         );
         const user = response.data;
