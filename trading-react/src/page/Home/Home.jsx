@@ -7,6 +7,7 @@ import { Dot, MessageCircle, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCoinList } from "@/State/Coin/Action";
+import { getTop50CoinList } from "/src/State/Coin/Action";
 
 const Home = () => {
     const [category, setCategory] = React.useState("all");
@@ -30,6 +31,10 @@ const Home = () => {
         }
         setInputValue("")
     }
+
+    useEffect(() => {
+        dispatch(getTop50CoinList())
+    },[category])
     
     useEffect(()=>{
           dispatch(getCoinList(1))
@@ -71,7 +76,7 @@ const Home = () => {
                             Top Losers
                         </Button>
                     </div>
-                    <AssetTable coin = {coin.coinList} category = {category}/>
+                    <AssetTable coin = {category == "all"?coin.coinList:coin.top50} category = {category}/>
                 </div>
 
                 {/* Right Side: StockChart and ETH Info */}

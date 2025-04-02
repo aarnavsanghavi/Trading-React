@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { Button } from "@/components/ui/button"; // Make sure to import your Button component or use a button element
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMarketChart } from "/src/State/Coin/Action";
 
 const timeSeries = [
     {
@@ -41,26 +43,14 @@ const timeSeries = [
     },
 ];
 
-const StockChart = () => {
+const StockChart = ({coinId}) => {
+    const dispatch=useDispatch()
+    const {coin} = useSelector(store=>store)
     const [activeLable, setActiveLable] = useState("1 Day");
     const series = [
         {
             name: "Price",
-            data: [
-                [Date.parse("2023-01-01"), 100],
-                [Date.parse("2023-01-02"), 110],
-                [Date.parse("2023-01-03"), 105],
-                [Date.parse("2023-01-04"), 115],
-                [Date.parse("2023-01-05"), 120],
-                [Date.parse("2023-01-06"), 118],
-                [Date.parse("2023-01-07"), 125],
-                [Date.parse("2023-01-08"), 130],
-                [Date.parse("2023-01-09"), 128],
-                [Date.parse("2023-01-10"), 135],
-                [Date.parse("2023-01-11"), 140],
-                [Date.parse("2023-01-12"), 138],
-                [Date.parse("2023-01-13"), 145]
-            ]
+            data: coin.marketChart.data,
         }
     ];
 
@@ -114,6 +104,9 @@ const StockChart = () => {
     const handleActiveLable = (value)=>{
         setActiveLable(value);
     }
+    useEffect(() => {
+        dispatch(fetchMarketChart({coinId,days:30,jwt:localStorage.getItem("jwt")}))
+    } , [dispatch,coinId,activeLable])
     return (
         <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto" }}>
             <div className="space-x-3"> 
