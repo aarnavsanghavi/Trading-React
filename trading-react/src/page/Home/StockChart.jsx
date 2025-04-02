@@ -46,7 +46,7 @@ const timeSeries = [
 const StockChart = ({coinId}) => {
     const dispatch=useDispatch()
     const {coin} = useSelector(store=>store)
-    const [activeLable, setActiveLable] = useState("1 Day");
+    const [activeLable, setActiveLable] = useState(timeSeries[0]);
     const series = [
         {
             name: "Price",
@@ -105,15 +105,15 @@ const StockChart = ({coinId}) => {
         setActiveLable(value);
     }
     useEffect(() => {
-        dispatch(fetchMarketChart({coinId,days:30,jwt:localStorage.getItem("jwt")}))
+        dispatch(fetchMarketChart({coinId,days:activeLable.value,jwt:localStorage.getItem("jwt")}))
     } , [dispatch,coinId,activeLable])
     return (
         <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto" }}>
             <div className="space-x-3"> 
                 {timeSeries.map((item) => (
                     <Button 
-                        variant = {activeLable == item.lable?"":"outline"}
-                        onClick = {()=>handleActiveLable(item.lable)}
+                        variant = {activeLable.lable == item.lable?"":"outline"}
+                        onClick = {()=>handleActiveLable(item)}
                         key={item.lable}
                         className="px-4 py-2 bg-blue-500 text-white rounded"
                     >

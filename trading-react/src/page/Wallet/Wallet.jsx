@@ -6,8 +6,41 @@ import TopUpForm from "./TopUpForm";
 import WithdrawalForm from "./WithdrawalForm";
 import Transferform from "./Transferform";
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUserWallet } from "@/State/Wallet/Action";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { depositMoney } from "@/State/Wallet/Action";
+
+function useQuery(){
+    return new URLSearchParams(useLocation().search)
+}
 
 export const Wallet = () => {
+  const dispatch = useDispatch();
+  const {wallet} = useSelector(store=>store)
+  const query = useQuery()
+  const orderId = query.get("order_id");
+  const paymentId = query.get("payment_id")
+  const razorpayPaymentId = query.get("razorpay_payment_id")
+  const navigate = useNavigate()
+  useEffect(()=>{
+    handleFetchUserWallet();
+  },[])
+
+  useEffect(()=>{
+    if(orderId){
+      dispatch(depositMoney({jwt:localStorage.getItem("jwt"),
+        orderId,
+        paymentId:razorpayPaymentId || paymentId,
+        navigate
+      }))
+    }
+  }, [orderId, paymentId, razorpayPaymentId])
+
+  const handleFetchUserWallet=()=>{
+    dispatch(getUserWallet(localStorage.getItem("jwt")))
+  }
   return (
     <div className="flex flex-col items-center">
       <div className="pt-10 w-full lg:w-[60%]">
@@ -27,7 +60,7 @@ export const Wallet = () => {
                 </div>
               </div>
               <div>
-                <ReloadIcon className="w-6 h-6 cursor-pointer hover:text-gray-400"/>
+                <ReloadIcon onClick = {handleFetchUserWallet} className="w-6 h-6 cursor-pointer hover:text-gray-400"/>
               </div>
             </div>
           </CardHeader>
@@ -35,7 +68,7 @@ export const Wallet = () => {
             <div className="flex items-center">
               <IndianRupeeIcon className="h-6 w-6" />
               <span className="text-2xl font-semibold">
-                20000
+                {wallet.userWallet.balance}
               </span>
             </div>
 

@@ -4,10 +4,13 @@ import { DotFilledIcon } from '@radix-ui/react-icons';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useDispatch } from 'react-redux';
+import { paymentHandler } from '@/State/Wallet/Action';
 
 const TopUpForm = () => {
   const [amount, setAmount] = React.useState('')
   const [paymentMethod, setPaymentMethod] = React.useState("RAZORPAY")
+  const dispatch = useDispatch();
   const handlePaymentMethodChange = (value) => {
     setPaymentMethod(value)
   }
@@ -17,6 +20,10 @@ const TopUpForm = () => {
 
   const handleSubmit = () => {
     console.log(amount, paymentMethod);
+    dispatch(paymentHandler({jwt:localStorage.getItem("jwt"),
+        paymentMethod,
+        amount
+    }))
   }
   return (
     <div className='pt-10 space-y-5'>

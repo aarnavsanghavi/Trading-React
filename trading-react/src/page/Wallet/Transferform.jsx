@@ -2,8 +2,11 @@ import React from 'react'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 import { DialogClose } from '@radix-ui/react-dialog';
+import { transferMoney } from '@/State/Wallet/Action';
 
 const Transferform = () => {
+  const dispatch = useDispatch();
+  const {wallet} = useSelector(store=>store)
   const [formData, setFormData] = React.useState({
     amount: '',
     walletId: '',
@@ -18,6 +21,9 @@ const Transferform = () => {
   }
 
   const handleSubmit = () => {
+    dispatch(transferMoney({
+      jwt:localStorage.getItem("jwt")
+    }))
     console.log(formData)
   }
 

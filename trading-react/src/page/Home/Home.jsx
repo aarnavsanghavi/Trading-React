@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+  } from "@/components/ui/pagination"
 import AssetTable from "./AssetTable";
 import StockChart from "./StockChart";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
@@ -77,11 +86,32 @@ const Home = () => {
                         </Button>
                     </div>
                     <AssetTable coin = {category == "all"?coin.coinList:coin.top50} category = {category}/>
+                    <div>
+                    <Pagination>
+                    <PaginationContent>
+                        <PaginationItem>
+                        <PaginationPrevious href="#" />
+                        </PaginationItem>
+                        <PaginationItem>
+                        <PaginationLink href="#">1</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                        <PaginationEllipsis />
+                        </PaginationItem>
+                        <PaginationItem>
+                        <PaginationNext href="#" />
+                        </PaginationItem>
+                    </PaginationContent>
+                    </Pagination>
+
+                    </div>
+
+                    
                 </div>
 
                 {/* Right Side: StockChart and ETH Info */}
                 <div className="lg:w-[50%] p-5 space-y-4">
-                    <StockChart />
+                    <StockChart coinId = {"bitcoin"}/>
                     
                     {/* Compact ETH Info */}
                     <div className="flex items-center justify-between mt-4 p-2 bg-gray-100 rounded-lg">
