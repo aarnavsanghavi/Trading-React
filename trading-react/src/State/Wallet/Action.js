@@ -37,7 +37,7 @@ export const getWalletTransactions =
     dispatch({ type: types.GET_WALLET_TRANSACTION_REQUEST });
 
     try {
-      const response = await api.get("/api/wallet/transactions", {
+      const response = await api.get("/api/transactions", {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
@@ -139,6 +139,8 @@ export const transferMoney =
         type: types.TRANSFER_MONEY_SUCCESS,
         payload: response.data,
       });
+
+      console.log("Transfer Money Sent", response)
     } catch (error) {
       dispatch({
         type: types.TRANSFER_MONEY_FAILURE,

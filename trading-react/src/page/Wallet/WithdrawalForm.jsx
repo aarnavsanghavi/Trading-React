@@ -3,15 +3,20 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from '@radix-ui/react-dialog';
+import { useDispatch, useSelector } from "react-redux";
+import { withdrawalRequest } from '@/State/Withdrawal/Action';
 
 const WithdrawalForm = () => {
   const [amount, setAmount] = React.useState('')
+  const dispatch = useDispatch();
+  const {wallet, withdrawal} = useSelector(store=>store)
 
   const handleChange = (e) => {
     setAmount(e.target.value)
   }
 
   const handleSubmit = () => {
+    dispatch(withdrawalRequest({amount, jwt:localStorage.getItem("jwt")}))
     console.log(amount)
   }
 
@@ -42,7 +47,7 @@ const WithdrawalForm = () => {
           className = "h-8 w-8"
           src="sdvsdvsd" alt="" />
           <div>
-            <p className='text-xl font-bold'>ICICI Bank</p>
+            <p className='text-xl font-bold'>{withdrawal.paymentDetails?.bankName}</p>
             <p className='text-xs'>*************163</p>
           </div>
 

@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { getUserWallet } from "@/State/Wallet/Action";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { depositMoney } from "@/State/Wallet/Action";
+import { getWalletTransactions } from "@/State/Wallet/Action";
 
 function useQuery(){
     return new URLSearchParams(useLocation().search)
@@ -24,8 +25,10 @@ export const Wallet = () => {
   const paymentId = query.get("payment_id")
   const razorpayPaymentId = query.get("razorpay_payment_id")
   const navigate = useNavigate()
+  
   useEffect(()=>{
     handleFetchUserWallet();
+    handleFetchWalletTransaction();
   },[])
 
   useEffect(()=>{
@@ -40,6 +43,10 @@ export const Wallet = () => {
 
   const handleFetchUserWallet=()=>{
     dispatch(getUserWallet(localStorage.getItem("jwt")))
+  };
+
+  const handleFetchWalletTransaction = () => {
+    dispatch(getWalletTransactions({jwt:localStorage.getItem("jwt")}))
   }
   return (
     <div className="flex flex-col items-center">
@@ -53,7 +60,7 @@ export const Wallet = () => {
                   <CardTitle className="text-2xl">My Wallet</CardTitle>
                   <div className="flex items-center gap-2">
                     <p className="text-gray-200 text-sm">
-                      #475ETT
+                      {wallet.userWallet?.id}
                     </p>
                     <CopyIcon size={12} className="cursor-pointer hover:text-slate-300" />
                   </div>
@@ -137,19 +144,19 @@ export const Wallet = () => {
               <div key={i}>
                 <Card className="lg:w-[50] px-5 flex justify-between items-center p-2">
                   <div className="flex items-center gap-5">
-                    <Avatar>
+                    <Avatar onClick = {handleFetchWalletTransaction}>
                       <AvatarFallback>
                         <ShuffleIcon className=""/>
                       </AvatarFallback>
                     </Avatar>
 
                     <div className="space-y-1">
-                      <h1>Buy Asset</h1>
-                      <p className="text-sm text-gray-500">2024-06-02</p>
+                      <h1>{item.type || item.purpose}</h1>
+                      <p className="text-sm text-gray-500">{item.date}</p>
                     </div>
                   </div>
                   <div>
-                    <p className={'text-green-500'}>9999 Inr</p>
+                    <p className={'text-green-500'}>{item.amount}</p>
                   </div>
                 </Card>
               </div>

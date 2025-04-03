@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 import { DialogClose } from '@radix-ui/react-dialog';
@@ -22,7 +23,12 @@ const Transferform = () => {
 
   const handleSubmit = () => {
     dispatch(transferMoney({
-      jwt:localStorage.getItem("jwt")
+      jwt:localStorage.getItem("jwt"),
+      walletId:formData.walletId,
+      reqData:{
+        amount:formData.amount,
+        purpose:formData.purpose
+      }
     }))
     console.log(formData)
   }
